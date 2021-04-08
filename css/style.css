@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Slabo+27px&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Slabo+27px&family=Train+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Playfair+Display:wght@400;600;700&display=swap');
+
 body {
   font-family: 'Lobster', cursive;
   margin: 0;
@@ -25,17 +26,18 @@ body {
   justify-content: center;
 }
 
-.logo1 {
-  width: 200px;
-  position: absolute;
-  margin-top: 200px;
-  margin-right: 700px;
-}
-
+.logo1,
 .logo2 {
   width: 200px;
   position: absolute;
   margin-top: 200px;
+}
+
+.logo1 {
+  margin-right: 700px;
+}
+
+.logo2 {
   margin-left: 700px;
 }
 
@@ -113,12 +115,10 @@ span {
   display: flex;
   width: 150px;
   height: 150px;
-  align-items: center;
-  justify-content: center;
-  font-size: 5em;
   font-weight: bold;
-  border: 4px solid #010a15;
+  border: 5px solid #010a15;
   transition: 1s;
+  justify-content: center;
 }
 
 #block0, #block1, #block2 {
@@ -152,28 +152,32 @@ span {
 .x,
 .o {
   cursor: default;
+  width: 150px;
+  height: 150px;
+  font-size: 140px;
+  align-items: center;
+  justify-content: center;
 }
 
 .x::before {
   content: '×';
-  font-size: 200px;
-  color: #7b8898;
-
+  color: #39CCCC;
 }
 
 .o::before {
   content: '○';
-  color: #e02e45;
-  font-size: 200px;
-  margin-bottom: 20px;
+  color: #ff0000;
 }
 
 .won::before {
   color: #ffeb3b;
   display: inline-block;
-  margin: 0 0.5rem;
-  animation: bounce;
-  animation-duration: 20s;
+  animation: key1 .3s ease infinite alternate;
+}
+
+@keyframes key1 {
+  0% {transform: translateY(0px);}
+  100% {transform: translateY(-20px);}
 }
 
 .player1win,
@@ -202,7 +206,6 @@ span {
   font-family: 'Rye', cursive;
   box-shadow: 0 0 15px #e6f7ff;
   margin-right: 400px;
-
 }
 
 .quit {

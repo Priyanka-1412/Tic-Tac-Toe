@@ -17,8 +17,8 @@ Repeat the game with the same players selection.
 Start a new game.
 
 #### score:
-Scores for each player will be recorded.
+Scores for each player will be recorded. Highest score with player name would also get recorded.
 
-![Tic Tac Toe](images/gameboard.png)
+![Tic Tac Toe](images/tictacscreen1.png)
 
-![Tic Tac Toe](images/tictac.png)
+![Tic Tac Toe](images/tictacscreen2.png)
