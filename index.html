@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Tic Tac Toe</title>
-  </head>
-  <body>
-    <div class="container">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Tic Tac Toe</title>
+</head>
+<body>
+
+  <div class="containerA">
+
+    <h1>Tic Tac Toe</h1>
+    <ul>
+     <li>Player 1 Name: <input type="text" id = "player1"placeholder="Please enter your name"value="">
+     <li>Player 2 Name: <input type="text" id = "player2" placeholder="Please enter your name"value="">
+    </ul>
+    <button id="start">Play</button>
+
+    <div class="logo1">
+      <img src="images/logo1.png">
+    </div>
+
+    <div class="logo2">
+      <img src="images/logo.png">
+    </div>
+
+  </div>
+
+  <div class="containerB">
+
+    <div class="board">
       <h1 >Tic <span>Tac</span> Toe</h1>
-      <div class="gamestatus">Player 1 is next</div>
-      <img class= "player1" src="images/ezgif.com-gif-maker (3).gif">
-      <img class= "player2" src="images/ezgif.com-gif-maker (4).gif">
+      <img class= "player1win" src="images/ezgif.com-gif-maker (3).gif">
+      <img class= "player2win" src="images/ezgif.com-gif-maker (4).gif">
+      <img class= "tiegame" src="images/tiegame.jpeg">
+
       <div class="playarea">
         <div id="block0" class="block"></div>
         <div id="block1" class="block"></div>
@@ -22,10 +46,21 @@
         <div id="block7" class="block"></div>
         <div id="block8" class="block"></div>
       </div>
-      <div class="reset">Reset</div>
     </div>
+
+    <section class = scoreboard>
+      <div class="gamestatus">Player 1 is next</div>
+      <div class="reset">Play Again</div>
+      <div class="quit">Exit Game</div>
+      <div id="score1">Score: Player 1:</div>
+      <div id="score2">Score: Player 2:</div>
+    </section>
+  </div>
+
+    <audio class = "tickSound" src="Audio/ticksound.mp3"></audio>
+    <audio class="gameFinish" src="Audio/gamefinish.wav"></audio>
+
     <script src="js/jQuery.js"></script>
     <script src="js/project.js"></script>
-    <script src="js/winner.js"></script>
-  </body>
+</body>
 </html>

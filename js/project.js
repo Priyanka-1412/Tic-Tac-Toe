@@ -1,40 +1,77 @@
+//Hide game screen
+$('.containerB').hide();
+let xSymbol = '';
+let oSymbol = '';
+
+//get players name and change screen
+const gameDisplay = function () {
+
+//retrive the input value
+  xSymbol = $('#player1').val();
+  oSymbol = $('#player2').val();
+
+if (xSymbol === '' || oSymbol === '') {
+  xSymbol = 'Player 1';
+  oSymbol = 'Player 2';
+};
+
+//change the screen
+  $('.containerA').hide();
+  $('.containerB').show();
+  $('.gamestatus').text(`${xSymbol} is first`); //set xSymbol as first Player
+  $('#score1').text(`Score: ${xSymbol} : ${0}`);  //set scoreboard
+  $('#score2').text(`Score: ${oSymbol} : ${0}`); //set scoreboard
+  resetGame();
+};
+
+$('#start').on('click', gameDisplay);
+
 //retrive html element and sore in variables
-const gamestatus = $('.gamestatus');
-const reset = $('.reset');
 const cellBlocks = $(".block");
 let gameIsOn = true;
 let player1IsNext = true;
+let scoreBoard1 = 0;
+let scoreBoard2 = 0;
 
-//get winner images and hide it
-const player1Win = $('.player1');
-const player2Win = $('.player2');
-player1Win.hide();
-player2Win.hide();
-
-//declare variable for player 1 and player 2
-const xSymbol = 'Player 1';
-const oSymbol = 'player 2';
-
-//function that take symbol as parameter and return player Id
-const getSymbol = function (symbol) {
-  if (symbol === 'x') {
-    xSymbol;
-  }
-  else {
-    oSymbol;
-  }
-};
+//Hide the HTML elements
+$('.player1win').hide();
+$('.player2win').hide();
+$('.tiegame').hide();
 
 //Announcing winner
 const gameWinner = function (symbol) {
   gameIsOn = false;
-  if (symbol === 'x') {
-    gamestatus.innerHTML = `${getSymbol(symbol)} has won!`;
-    player1Win.fadeIn(4000);
 
-  } else {
-    gamestatus.innerHTML = `${getSymbol(symbol)} has won!`;
-    player2Win.fadeIn(3000);
+  if (symbol === 'x') {
+
+    scoreBoard1 = scoreBoard1 + 1;
+
+    $('.gamestatus').text(`${xSymbol} has won`);
+    $('.gameFinish').get(0).play();
+    $('#score1').text(`Score: ${xSymbol} : ${scoreBoard1}`);
+    $('.playarea').hide(1000);
+    $('.player1win').show(4000);
+    $('.player1win').hide(1000);
+
+    setTimeout(function() {
+      $('.playarea').show(4000);
+    }, 3000);
+
+  }
+  else {
+
+    scoreBoard2 = scoreBoard2 + 1;
+
+    $('.gamestatus').text(`${oSymbol} has won`);
+    $('.gameFinish').get(0).play();
+    $('#score2').text(`Score: ${oSymbol} : ${scoreBoard2}`);
+    $('.playarea').hide(1000);
+    $('.player2win').show(4000);
+    $('.player2win').hide(1000);
+
+    setTimeout(function() {
+      $('.playarea').show(4000);
+    }, 3000);
   }
 };
 
@@ -52,7 +89,7 @@ const updateGameSatus = function () {
   const eighthBlock = cellBlocks[7].classList[1];
   const ninthBlock = cellBlocks[8].classList[1];
 
-//condition for win check with value in firstblock, if its undefined then condition will be true all the time
+//condition for win check with value in blocks, if its undefined then condition will be true all the time
   if (firstBlock && firstBlock === secondBlock && firstBlock === thirdBlock) {
     gameWinner(firstBlock);
     cellBlocks[0].classList.add('won');
@@ -104,22 +141,34 @@ const updateGameSatus = function () {
   //check for tie
   else if (firstBlock && secondBlock && thirdBlock && fouthBlock && fifthBlock && sixthBlock && seventhBlock && eighthBlock && ninthBlock) {
     gameIsOn = false;
-    gamestatus.innerHTML = 'Game is tied!';
+
+    $('.gamestatus').text(`It's a tie game`);
+    $('.gameFinish').get(0).play();
+    $('.playarea').hide(1000);
+    $('.tiegame').show(4000);
+    $('.tiegame').hide(1000);
+
+    setTimeout(function() {
+      $('.playarea').show(4000);
+    }, 3000);
   }
+
   else {
     player1IsNext = !player1IsNext
     if (player1IsNext) {
-      gamestatus.innerHTML = `${xSymbol} is next`;
-    } else {
-      gamestatus.innerHTML = `${oSymbol} is next`;
+      $('.gamestatus').text(`${xSymbol} is next`);
     }
-  }
+    else {
+      $('.gamestatus').text(`${oSymbol} is next`);
+    }
+  };
 };
 
 //Reset game and set player 1 is always as first player
 const resetGame = function (event) {
   player1IsNext = true;
-  gamestatus.innerHTML = `${xSymbol} is next`;
+  $('.gamestatus').text(`${xSymbol} is next`);
+
   for (let i = 0; i <cellBlocks.length; i++){
     cellBlocks[i].classList.remove('x');
     cellBlocks[i].classList.remove('o');
@@ -136,18 +185,20 @@ const blockClick = function (event) {
   if (!gameIsOn || classList[1] === 'x' || classList[1] === 'o') {
     return false;
   };
+  // $('.tickSound').get(0).duration = 10;
+  $('.tickSound').get(0).pause();
+  $('.tickSound').get(0).currentTime = 0;
+  $('.tickSound').get(0).play();
 
   if (player1IsNext) {
     classList.add('x');
 
     updateGameSatus();
-    // player1IsNext = !player1IsNext
   }
+
   else {
     classList.add('o');
-
     updateGameSatus();
-    // player1IsNext = !player1IsNext
   }
 };
 
@@ -155,6 +206,15 @@ const blockClick = function (event) {
 $('.reset').on('click', resetGame);
 
 for (let i = 0; i <cellBlocks.length; i++) {
-  // console.log(cellBlocks[i]);
   $(cellBlocks[i]).on('click', blockClick)
 };
+
+//Exit game and make input value to empty string before new game starts
+const exitGame = function () {
+  $('.containerB').hide();
+  $('.containerA').show();
+  $('#player1').val('');
+  $('#player2').val('');
+};
+//click event for game exit
+$('.quit').on('click', exitGame);
