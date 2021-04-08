@@ -7,13 +7,11 @@
   <title>Tic Tac Toe</title>
 </head>
 <body>
-
   <div class="containerA">
-
     <h1>Tic Tac Toe</h1>
     <ul>
-     <li>Player 1 Name: <input type="text" id = "player1"placeholder="Please enter your name"value="">
-     <li>Player 2 Name: <input type="text" id = "player2" placeholder="Please enter your name"value="">
+     <li>Player 1 Name: x<input type="text" id = "player1"placeholder="Please enter your name"value="">
+     <li>Player 2 Name: o<input type="text" id = "player2" placeholder="Please enter your name"value="">
     </ul>
     <button id="start">Play</button>
 
@@ -24,13 +22,11 @@
     <div class="logo2">
       <img src="images/logo.png">
     </div>
-
   </div>
 
   <div class="containerB">
-
     <div class="board">
-      <h1 >Tic <span>Tac</span> Toe</h1>
+      <h1>Tic <span>Tac</span> Toe</h1>
       <img class= "player1win" src="images/ezgif.com-gif-maker (3).gif">
       <img class= "player2win" src="images/ezgif.com-gif-maker (4).gif">
       <img class= "tiegame" src="images/tiegame.jpeg">
@@ -50,10 +46,12 @@
 
     <section class = scoreboard>
       <div class="gamestatus">Player 1 is next</div>
-      <div class="reset">Play Again</div>
-      <div class="quit">Exit Game</div>
       <div id="score1">Score: Player 1:</div>
       <div id="score2">Score: Player 2:</div>
+      <div id="draw">Tie Game:</div>
+      <div id="highestscore">Highest score:</div>
+      <div class="reset">Play</div>
+      <div class="quit">Exit</div>
     </section>
   </div>
 

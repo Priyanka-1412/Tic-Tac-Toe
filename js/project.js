@@ -6,21 +6,26 @@ let oSymbol = '';
 //get players name and change screen
 const gameDisplay = function () {
 
-//retrive the input value
+  //retrive the input value
   xSymbol = $('#player1').val();
   oSymbol = $('#player2').val();
 
-if (xSymbol === '' || oSymbol === '') {
-  xSymbol = 'Player 1';
-  oSymbol = 'Player 2';
-};
+  if (xSymbol === '') {
+    xSymbol = 'Player 1';
+  };
 
-//change the screen
+  if (oSymbol === '') {
+    oSymbol = 'Player 2';
+  };
+
+  //change the screen
   $('.containerA').hide();
   $('.containerB').show();
   $('.gamestatus').text(`${xSymbol} is first`); //set xSymbol as first Player
   $('#score1').text(`Score: ${xSymbol} : ${0}`);  //set scoreboard
   $('#score2').text(`Score: ${oSymbol} : ${0}`); //set scoreboard
+  $('#draw').text(`Tie Game: ${0}`);
+  $('#highestscore').text(`Highest score: ${0}`);
   resetGame();
 };
 
@@ -32,7 +37,8 @@ let gameIsOn = true;
 let player1IsNext = true;
 let scoreBoard1 = 0;
 let scoreBoard2 = 0;
-
+let drawGame = 0;
+let highestScore = 0
 //Hide the HTML elements
 $('.player1win').hide();
 $('.player2win').hide();
@@ -73,6 +79,19 @@ const gameWinner = function (symbol) {
       $('.playarea').show(4000);
     }, 3000);
   }
+
+  //conditions to check highest score
+  if (scoreBoard1 > scoreBoard2) {
+    highestScore = scoreBoard1;
+    $('#highestscore').text(`Highest score: ${highestScore} : ${xSymbol}`);
+  }
+  else if (scoreBoard2 > scoreBoard1) {
+    highestScore = scoreBoard2;
+    $('#highestscore').text(`Highest score: ${highestScore} : ${oSymbol}`);
+  }
+  else {
+    $('#highestscore').text(`Highest score: ${scoreBoard1}`);
+  }
 };
 
 //check game status for win or tie
@@ -89,7 +108,7 @@ const updateGameSatus = function () {
   const eighthBlock = cellBlocks[7].classList[1];
   const ninthBlock = cellBlocks[8].classList[1];
 
-//condition for win check with value in blocks, if its undefined then condition will be true all the time
+  //condition for win check with value in blocks, if its undefined then condition will be true all the time
   if (firstBlock && firstBlock === secondBlock && firstBlock === thirdBlock) {
     gameWinner(firstBlock);
     cellBlocks[0].classList.add('won');
@@ -138,10 +157,12 @@ const updateGameSatus = function () {
     cellBlocks[4].classList.add('won');
     cellBlocks[6].classList.add('won');
   }
-  //check for tie
+  //check for tie and add score to scoreboard
   else if (firstBlock && secondBlock && thirdBlock && fouthBlock && fifthBlock && sixthBlock && seventhBlock && eighthBlock && ninthBlock) {
     gameIsOn = false;
 
+    drawGame = drawGame + 1;
+    $('#draw').text(`Tie Game: ${drawGame}`);
     $('.gamestatus').text(`It's a tie game`);
     $('.gameFinish').get(0).play();
     $('.playarea').hide(1000);
@@ -152,7 +173,6 @@ const updateGameSatus = function () {
       $('.playarea').show(4000);
     }, 3000);
   }
-
   else {
     player1IsNext = !player1IsNext
     if (player1IsNext) {
@@ -167,7 +187,7 @@ const updateGameSatus = function () {
 //Reset game and set player 1 is always as first player
 const resetGame = function (event) {
   player1IsNext = true;
-  $('.gamestatus').text(`${xSymbol} is next`);
+  $('.gamestatus').text(`${xSymbol} is first`);
 
   for (let i = 0; i <cellBlocks.length; i++){
     cellBlocks[i].classList.remove('x');
@@ -181,11 +201,11 @@ const resetGame = function (event) {
 const blockClick = function (event) {
   let classList = event.target.classList;
 
-//if no class with name 'x' or 'y' then add class else return false
+  //if no class with name 'x' or 'y' then add class else return false
   if (!gameIsOn || classList[1] === 'x' || classList[1] === 'o') {
     return false;
   };
-  // $('.tickSound').get(0).duration = 10;
+
   $('.tickSound').get(0).pause();
   $('.tickSound').get(0).currentTime = 0;
   $('.tickSound').get(0).play();
@@ -195,7 +215,6 @@ const blockClick = function (event) {
 
     updateGameSatus();
   }
-
   else {
     classList.add('o');
     updateGameSatus();
