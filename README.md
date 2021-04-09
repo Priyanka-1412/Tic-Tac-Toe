@@ -7,7 +7,7 @@ This Tic Tac Toe Project is a 3x3 game. The goal of this project was to create a
 ### How to play
 
 #### Players details
-When the game is loaded, you need to enter name for player 1 and Player 2. Once ready click on play button. You can also select emoji 🐻👨‍🏫and use it as Player ID. If user input not provided that the default one is Player 1 and player 2.
+When the game is loaded, you need to enter name for player 1 and Player 2. Once ready click on play button. You can also select emoji 🐻👨‍🏫and use it as Player ID. If user input not provided, the default one is Player 1 and player 2.
 #### Player 1 versus Player 2.
 You just need to click in a position in the board to have the given player to play it. The current player will be highlighted on right hand side of the screen.
 #### Game over:
