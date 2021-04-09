@@ -224,3 +224,37 @@ span {
   box-shadow: 0 0 15px #e6f7ff;
   font-family: 'Rye', cursive;
 }
+
+@media only screen and (max-width: 1024px) {
+  .playarea {
+    margin-top: 25px;
+    grid-gap: 10px;
+  }
+  .block {
+    height: 150px;
+    width: 150px;
+  }
+  .x::before {
+    font-size: 150px;
+  }
+  .o::before {
+    font-size: 150px;
+  }
+}
+@media only screen and (max-width: 540px) {
+  .containerA,
+  .containerB {
+    margin: 10px;
+    padding: 10px;
+  }
+  .playarea{
+    height: 100px;
+    width: 100px;
+  }
+  .x::before {
+    font-size: 50px;
+  }
+  .o::before {
+    font-size: 50px;
+  }
+}
