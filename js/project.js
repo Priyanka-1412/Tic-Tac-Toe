@@ -69,11 +69,11 @@ const gameWinner = function (symbol) {
     scoreBoard2 = scoreBoard2 + 1;
 
     $('.gamestatus').text(`${oSymbol} has won`);
-    $('.gameFinish').get(0).play();
-    $('#score2').text(`Score: ${oSymbol} : ${scoreBoard2}`);
-    $('.playarea').hide(1000);
-    $('.player2win').show(4000);
-    $('.player2win').hide(1000);
+    $('.gameFinish').get(0).play(); //Play music
+    $('#score2').text(`Score: ${oSymbol} : ${scoreBoard2}`); //rescord score
+    $('.playarea').hide(1000); // hide playarea screen
+    $('.player2win').show(4000); //show winner giphy
+    $('.player2win').hide(1000); //hide giphy
 
     setTimeout(function() {
       $('.playarea').show(4000);
